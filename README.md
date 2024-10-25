@@ -1,7 +1,8 @@
 Porjecto de IONIC iniciado en modo standalon.
 
 ### Instalar dependencias
-npm install
+- npm install
 
 ### Iniciar server 
-ionic serve 
+- ionic serve 
+
