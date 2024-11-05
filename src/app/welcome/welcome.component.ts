@@ -30,6 +30,7 @@ export class WelcomeComponent {
       // Send a POST request to the backend API with Axios
       const response = await axios.post('http://127.0.0.1:8000/api/comercial/login/', loginData);
 
+     
       // Check if login was successful
       if (response.data.success) {
         this.router.navigate(['/intermediate']);  // Navigate to intermediate component on success
@@ -40,6 +41,7 @@ export class WelcomeComponent {
       // Cast error as AxiosError if it's an instance of AxiosError
       const axiosError = error as AxiosError;
 
+        console.log(axiosError.response)
       // Handle error responses
       if (axiosError.response) {
         // Specific error handling based on response status
@@ -64,5 +66,9 @@ export class WelcomeComponent {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  goToUserRegister() {
+    this.router.navigate(['/user-register']); // Navega a la página de registro
   }
 }

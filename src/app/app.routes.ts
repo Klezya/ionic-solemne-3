@@ -22,10 +22,12 @@ export const routes: Routes = [
     loadComponent: () => import('./comerciales/comerciales.component').then(m => m.ComercialesComponent),
   },
   {
+    path: 'user-register',  // Nueva ruta para el componente de registro de usuario
+    loadComponent: () => import('./user-register/user-register.component').then(m => m.UserRegisterComponent),
+  },
+  {
     path: '',
     redirectTo: 'welcome',
     pathMatch: 'full',
   },
 ];
-
-

@@ -23,7 +23,12 @@
     </div>
   </form>
 
-  <!-- Mostrar el mensaje de error si las credenciales son incorrectas -->
+  <!-- Botón para ir a la página de registro de usuario -->
+  <div class="ion-padding">
+    <ion-button expand="block" (click)="goToUserRegister()">Registrarse</ion-button>
+  </div>
+
+  <!-- Mensaje de error -->
   <div *ngIf="errorMessage" class="ion-text-center ion-padding">
     <ion-text color="danger">{{ errorMessage }}</ion-text>
   </div>
