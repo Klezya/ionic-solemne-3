@@ -33,7 +33,10 @@ export class WelcomeComponent {
      
       // Check if login was successful
       if (response.data.success) {
-        this.router.navigate(['/intermediate']);  // Navigate to intermediate component on success
+        //this.router.navigate(['/intermediate']);  
+        
+        this.router.navigate(['/intermediate', this.username]); // Navigate to intermediate component on success
+
       } else {
         this.showAlert('Credenciales incorrectas. Inténtalo nuevamente.');
       }

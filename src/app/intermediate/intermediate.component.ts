@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-intermediate',
@@ -12,7 +14,13 @@ import { CommonModule } from '@angular/common';
 })
 export class IntermediateComponent {
 
-  constructor(private router: Router) {}
+  nombre: string = '';
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.nombre = this.route.snapshot.paramMap.get('nombre') || '';
+    console.log(this.nombre)
+  }
 
   // Método para redirigir al Home
   goToHome() {
