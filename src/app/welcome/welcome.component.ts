@@ -33,9 +33,12 @@ export class WelcomeComponent {
      
       // Check if login was successful
       if (response.data.success) {
-        //this.router.navigate(['/intermediate']);  
+
+        //Guardo la informacion del comercial de manera local
+        localStorage.setItem('comercial', JSON.stringify(response.data.comercial));
+        this.router.navigate(['/intermediate']);  
         
-        this.router.navigate(['/intermediate', this.username]); // Navigate to intermediate component on success
+        //this.router.navigate(['/intermediate', this.username]); // Navigate to intermediate component on success
 
       } else {
         this.showAlert('Credenciales incorrectas. Inténtalo nuevamente.');
