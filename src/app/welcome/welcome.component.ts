@@ -35,7 +35,7 @@ export class WelcomeComponent {
       if (response.data.success) {
 
         //Guardo la informacion del comercial de manera local
-        localStorage.setItem('comercial', JSON.stringify(response.data.comercial));
+        localStorage.setItem('comercialid', response.data.comercial.id);
         this.router.navigate(['/intermediate']);  
         
         //this.router.navigate(['/intermediate', this.username]); // Navigate to intermediate component on success

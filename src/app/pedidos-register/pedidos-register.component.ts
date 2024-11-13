@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Router } from '@angular/router';
 import { IonicModule, AlertController } from '@ionic/angular';
 import { Location } from '@angular/common';
+import { Comercial, Pedido } from '../interface/interface'
 
 @Component({
   selector: 'app-pedidos-register',
@@ -17,24 +18,27 @@ export class PedidosRegisterComponent implements OnInit{
 
   fecha_hoy = new Date().toISOString().slice(0, 10);
 
-  pedido = {
+  pedido: Pedido = {
     total: '',
     fecha: this.fecha_hoy,
     cliente: '',
-    comercial: '',
+    comercial: 0,
   };
 
   errorMessage: string = '';  // Define errorMessage como una propiedad de tipo string
   clientes: any;
-  data_comercial: any;
+  comercial: Comercial = {id: 0, nombre: '', apellido1: '', apellido2: '', comision: 0};
+  nombreCompleto: string = ''
+  
 
-  constructor(private location: Location) {console.log(this.data_comercial)} // Inyectar Location
+  constructor(private location: Location) {} // Inyectar Location
 
 
-  ngOnInit() {
-    this.fetchClientes();
-    this.data_comercial = localStorage.getItem('comercial')
-    this.pedido.comercial = this.data_comercial.nombre
+  async ngOnInit() {
+    await this.fetchClientes();
+    await this.fetchComercial();
+    this.pedido.comercial = this.comercial.id
+    this.nombreCompleto = `${this.comercial.nombre} ${this.comercial.apellido1} ${this.comercial.apellido2}`
   }
 
   async fetchClientes() {
@@ -46,6 +50,14 @@ export class PedidosRegisterComponent implements OnInit{
     }
   }
 
+  async fetchComercial() {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/comerciales/${localStorage.getItem('comercialid')}`);
+      this.comercial = response.data; // Guarda el comercial obtenido de la API
+    } catch (error) {
+      console.error('Error al obtener el comercial:', error);
+    }
+  }
 
 
   async registerPedido(event: Event) {
