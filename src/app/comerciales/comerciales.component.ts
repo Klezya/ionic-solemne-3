@@ -21,6 +21,7 @@ export class ComercialesComponent {
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/comerciales');
       this.comerciales = response.data;
+      console.log(this.comerciales)
       this.errorMessage = ''; // Limpiar cualquier mensaje de error anterior
     } catch (error) {
       this.errorMessage = 'Error al obtener los comerciales. Verifique la conexión con la API.';

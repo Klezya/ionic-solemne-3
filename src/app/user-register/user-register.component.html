@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registro de Usuario</ion-title>
+    <ion-title>Registro de Comercial</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,8 +14,13 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Apellido</ion-label>
+      <ion-label position="floating">Primer Apellido</ion-label>
       <ion-input [(ngModel)]="user.apellido1" name="apellido1" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Segundo Apellido</ion-label>
+      <ion-input [(ngModel)]="user.apellido2" name="apellido2" required></ion-input>
     </ion-item>
 
     <ion-item>

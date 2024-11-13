@@ -19,6 +19,7 @@ export class UserRegisterComponent {
   user = {
     nombre: '',
     apellido1: '',
+    apellido2: '',
     comision: '',
     password: '',
   };
