@@ -1,3 +1,55 @@
-<p>
-  cliente-register works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro de Clientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>Regístra al cliente</h2>
+
+  <form (submit)="registerClient($event)">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="client.nombre" name="nombre" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Primer Apellido</ion-label>
+      <ion-input [(ngModel)]="client.apellido1" name="apellido1" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Segundo Apellido</ion-label>
+      <ion-input [(ngModel)]="client.apellido2" name="apellido2" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Ciudad</ion-label>
+      <ion-input [(ngModel)]="client.ciudad" name="ciudad" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Categoria</ion-label>
+      <ion-input [(ngModel)]="client.categoria" type="number" name="categirua" required></ion-input>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button type="submit" expand="block">Registrarse</ion-button>
+    </div>
+  </form>
+
+  <!-- Mensaje de error si hay un problema en el registro -->
+  <div *ngIf="errorMessage" class="ion-text-center ion-padding">
+    <ion-text color="danger">{{ errorMessage }}</ion-text>
+  </div>
+
+
+ <!-- Botón para regresar a la vista anterior -->
+ <div class="ion-padding">
+  <ion-button expand="block" (click)="goBack()">Regresar</ion-button>
+</div>
+
+<div *ngIf="errorMessage" class="ion-text-center ion-padding">
+  <ion-text color="danger">{{ errorMessage }}</ion-text>
+</div>
+</ion-content>

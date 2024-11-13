@@ -31,7 +31,7 @@ export class PedidosRegisterComponent implements OnInit{
   nombreCompleto: string = ''
   
 
-  constructor(private location: Location) {} // Inyectar Location
+  constructor(private location: Location, private router: Router) {} // Inyectar Location
 
 
   async ngOnInit() {
@@ -74,5 +74,9 @@ export class PedidosRegisterComponent implements OnInit{
 
   goBack() {
     this.location.back(); // Regresar a la vista anterior
+  }
+
+  goToRegisterClient() {
+    this.router.navigate(['/client-register'])
   }
 }
