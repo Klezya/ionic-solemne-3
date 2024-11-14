@@ -1,5 +1,5 @@
 export interface Comercial {
-    id: number;
+    id: string;
     nombre: string;
     apellido1: string;
     apellido2: string;
@@ -10,5 +10,5 @@ export interface Pedido {
     total: string; 
     fecha: string;
     cliente: string;
-    comercial: number; 
+    comercial: string; 
 }

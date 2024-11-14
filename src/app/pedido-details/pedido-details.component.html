@@ -1,3 +1,22 @@
-<p>
-  pedido-details works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirmación del Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Pedido Registrado Exitosamente</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Total:</strong> {{ pedido.total }}</p>
+      <p><strong>Fecha:</strong> {{ pedido.fecha }}</p>
+      <p><strong>Cliente:</strong> {{ pedido.cliente }}</p>
+      <p><strong>Comercial:</strong> {{ pedido.comercial }}</p>
+    </ion-card-content>
+  </ion-card>
+  <div class="ion-text-center ion-padding">
+    <ion-button (click)="goBack()">Regresar</ion-button>
+  </div>
+</ion-content>

@@ -22,12 +22,12 @@ export class PedidosRegisterComponent implements OnInit{
     total: '',
     fecha: this.fecha_hoy,
     cliente: '',
-    comercial: 0,
+    comercial: '',
   };
 
   errorMessage: string = '';  // Define errorMessage como una propiedad de tipo string
   clientes: any;
-  comercial: Comercial = {id: 0, nombre: '', apellido1: '', apellido2: '', comision: 0};
+  comercial: Comercial = {id: '', nombre: '', apellido1: '', apellido2: '', comision: 0};
   nombreCompleto: string = ''
   
 
@@ -66,6 +66,7 @@ export class PedidosRegisterComponent implements OnInit{
       const response = await axios.post('http://127.0.0.1:8000/api/pedidos/', this.pedido);
       console.log('Registro exitoso:', response.data);
       alert('Pedido registrado exitosamente');
+      this.router.navigate(['/pedido-details'], { state: { pedido: this.pedido } })
     } catch (error) {
       console.error('Error en el registro:', error);
       alert('Hubo un problema en el registro');
