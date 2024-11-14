@@ -6,22 +6,20 @@ import { IonicModule, AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common'; // Importar Location
 
-
-
 @Component({
-  selector: 'app-user-register',
+  selector: 'app-cliente-register',
+  templateUrl: './cliente-register.component.html',
+  styleUrls: ['./cliente-register.component.scss'],
   standalone: true,
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.scss'],
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class UserRegisterComponent {
-  user = {
+export class ClienteRegisterComponent {
+  client = {
     nombre: '',
     apellido1: '',
     apellido2: '',
-    comision: '',
-    password: '',
+    ciudad: '',
+    categoria: 0,
   };
 
   errorMessage: string = '';  // Define errorMessage como una propiedad de tipo string
@@ -29,12 +27,12 @@ export class UserRegisterComponent {
   constructor(private location: Location) {} // Inyectar Location
 
 
-  async registerUser(event: Event) {
+  async registerClient(event: Event) {
     event.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/comerciales/', this.user);
+      const response = await axios.post('http://127.0.0.1:8000/api/clientes/', this.client);
       console.log('Registro exitoso:', response.data);
-      alert('Usuario registrado exitosamente');
+      alert('Cliente registrado exitosamente');
     } catch (error) {
       console.error('Error en el registro:', error);
       alert('Hubo un problema en el registro');

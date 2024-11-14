@@ -14,12 +14,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class IntermediateComponent {
 
-  nombre: string = '';
+  //nombre: string = '';
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.nombre = this.route.snapshot.paramMap.get('nombre') || '';
-    console.log(this.nombre)
+    //this.nombre = this.route.snapshot.paramMap.get('nombre') || '';
+    //console.log(this.nombre)
+    console.log(localStorage.getItem('comercial'))
   }
 
   // Método para redirigir al Home
@@ -32,8 +33,12 @@ export class IntermediateComponent {
   }
 
  // Método para redirigir a Comerciales
- goToComerciales() {
+  goToComerciales() {
   this.router.navigate(['/comerciales']);
-}
+  }
+
+  goToRegistrarPredido(){
+    this.router.navigate(['/pedidos-register'])
+  }
 
 }

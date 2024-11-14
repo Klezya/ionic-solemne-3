@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro de Comercial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>¡Bienvenido! Regístrate a continuación</h2>
+
+  <form (submit)="registerPedido($event)">
+    <ion-item>
+      <ion-label position="floating">Total</ion-label>
+      <ion-input [(ngModel)]="pedido.total" name="nombre" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cliente</ion-label>
+      <ion-select [(ngModel)]="pedido.cliente" name="cliente" required>
+        <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{ cliente.nombre }} {{ cliente.apellido1 }} {{ cliente.apellido2 }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Comercial</ion-label>
+      <ion-input [(ngModel)]="nombreCompleto" name="comercial" required [disabled]="true"></ion-input>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button type="submit" expand="block">Registrar Pedido</ion-button>
+    </div>
+
+    <div class="ion-padding">
+      <ion-button (click)="goToRegisterClient()" expand="block">Registrar Nuevo Cliente</ion-button>
+    </div>
+  </form>
+
