@@ -32,7 +32,7 @@ export class PedidoDetailsComponent  implements OnInit {
 
   async fetchCliente() {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/clientes/${this.pedido.cliente}`);
+      const response = await axios.get(`https://ventas-solemne-3.onrender.com/api/clientes/${this.pedido.cliente}`);
       this.pedido.cliente = `${response.data.nombre} ${response.data.apellido1} ${response.data.apellido1}`; // Guarda la lista de clientes obtenida de la API
     } catch (error) {
       console.error('Error al obtener los clientes:', error);
@@ -41,7 +41,7 @@ export class PedidoDetailsComponent  implements OnInit {
 
   async fetchComercial() {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/comerciales/${this.pedido.comercial}`);
+      const response = await axios.get(`https://ventas-solemne-3.onrender.com/api/comerciales/${this.pedido.comercial}`);
       this.pedido.comercial = `${response.data.nombre} ${response.data.apellido1} ${response.data.apellido1}`; // Guarda el comercial obtenido de la API
     } catch (error) {
       console.error('Error al obtener el comercial:', error);

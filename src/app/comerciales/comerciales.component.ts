@@ -19,7 +19,7 @@ export class ComercialesComponent {
   // Método para obtener los comerciales desde la API
   async fetchComerciales() {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/comerciales');
+      const response = await axios.get('https://ventas-solemne-3.onrender.com/api/comerciales');
       this.comerciales = response.data;
       console.log(this.comerciales)
       this.errorMessage = ''; // Limpiar cualquier mensaje de error anterior

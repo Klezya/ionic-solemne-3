@@ -32,7 +32,7 @@ export class UserRegisterComponent {
   async registerUser(event: Event) {
     event.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/comerciales/', this.user);
+      const response = await axios.post('https://ventas-solemne-3.onrender.com/api/comerciales/', this.user);
       console.log('Registro exitoso:', response.data);
       alert('Usuario registrado exitosamente');
     } catch (error) {

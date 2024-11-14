@@ -28,7 +28,7 @@ export class WelcomeComponent {
       };
 
       // Send a POST request to the backend API with Axios
-      const response = await axios.post('http://127.0.0.1:8000/api/comercial/login/', loginData);
+      const response = await axios.post(`https://ventas-solemne-3.onrender.com/api/comercial/login/`, loginData);
 
      
       // Check if login was successful

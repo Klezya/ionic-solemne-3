@@ -30,7 +30,7 @@ export class ClienteRegisterComponent {
   async registerClient(event: Event) {
     event.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/clientes/', this.client);
+      const response = await axios.post('https://ventas-solemne-3.onrender.com/api/clientes/', this.client);
       console.log('Registro exitoso:', response.data);
       alert('Cliente registrado exitosamente');
     } catch (error) {

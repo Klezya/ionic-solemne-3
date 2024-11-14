@@ -43,7 +43,7 @@ export class PedidosRegisterComponent implements OnInit{
 
   async fetchClientes() {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/clientes/');
+      const response = await axios.get('https://ventas-solemne-3.onrender.com/api/clientes/');
       this.clientes = response.data; // Guarda la lista de clientes obtenida de la API
     } catch (error) {
       console.error('Error al obtener los clientes:', error);
@@ -52,7 +52,7 @@ export class PedidosRegisterComponent implements OnInit{
 
   async fetchComercial() {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/comerciales/${localStorage.getItem('comercialid')}`);
+      const response = await axios.get(`https://ventas-solemne-3.onrender.com/api/comerciales/${localStorage.getItem('comercialid')}`);
       this.comercial = response.data; // Guarda el comercial obtenido de la API
     } catch (error) {
       console.error('Error al obtener el comercial:', error);
@@ -63,7 +63,7 @@ export class PedidosRegisterComponent implements OnInit{
   async registerPedido(event: Event) {
     event.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/pedidos/', this.pedido);
+      const response = await axios.post('https://ventas-solemne-3.onrender.com/api/pedidos/', this.pedido);
       console.log('Registro exitoso:', response.data);
       alert('Pedido registrado exitosamente');
       this.router.navigate(['/pedido-details'], { state: { pedido: this.pedido } })
