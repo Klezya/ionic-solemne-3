@@ -1,33 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Punto Intermedio</ion-title>
+    <ion-title>Menu</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2 class="ion-text-center">Estás a un paso de acceder a las API Calls</h2>
 
   <!-- Contenedor del grid -->
   <div class="grid-container">
     <ion-card class="grid-card">
-      <ion-button expand="block" fill="solid" (click)="goToHome()" class="clientes">Clientes</ion-button>
+      <ion-button expand="block" fill="solid" (click)="goToHome()" class="clientes">Todos los Clientes</ion-button>
     </ion-card>
     
     <ion-card class="grid-card">
-      <ion-button expand="block" fill="solid" (click)="goToPedidos()" class="pedidos">Pedidos</ion-button>
+      <ion-button expand="block" fill="solid" (click)="goToPedidos()" class="pedidos">Tus Pedidos</ion-button>
     </ion-card>
 
     <ion-card class="grid-card">
-      <ion-button expand="block" fill="solid" (click)="goToComerciales()" class="comerciales">Comerciales</ion-button>
-    </ion-card>
-    
-    <ion-card class="grid-card">
-      <ion-button expand="block" fill="solid" class="otros">Otros</ion-button>
-    </ion-card>
+      <ion-button expand="block" fill="solid" (click)="goToComerciales()" class="comerciales">otros Comerciales</ion-button>
+    </ion-card>    
   </div>
 
   <!-- Contenedor para centrar el botón Generar Pedido -->
   <div class="genpedido-container">
-    <ion-button expand="block" fill="solid" (click)="goToRegistrarPredido()" class="genpedido">Generar Pedido</ion-button>
+    <ion-button expand="block" fill="solid" (click)="goToRegistrarPredido()" class="genpedido">Generar Nuevo Pedido</ion-button>
   </div>
 </ion-content>
