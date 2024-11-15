@@ -19,7 +19,7 @@ export class PedidosComponent {
   // Método para obtener los pedidos desde la API al presionar el botón
   async fetchPedidos() {
     try {
-      const response = await axios.get('https://ventas-solemne-3.onrender.com/api/pedidos');
+      const response = await axios.get('http://127.0.0.1:8000/api/pedidos');
       this.pedidos = response.data;
       this.errorMessage = ''; // Limpiar cualquier mensaje de error anterior
     } catch (error) {
