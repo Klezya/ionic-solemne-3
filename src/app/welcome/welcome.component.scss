@@ -1,0 +1,96 @@
+/* Colores personalizados */
+:root {
+    --custom-primary: #3880ff; /* Azul para el botón de Iniciar Sesión */
+    --custom-secondary: #ff4081; /* Rosa para el botón de Registrarse */
+    --custom-text-color: #ffffff; /* Blanco para el texto */
+    --custom-input-background: #2a2a2a; /* Fondo gris oscuro para los inputs */
+    --custom-input-text-color: #d3d3d3; /* Texto más claro en los inputs */
+  }
+  
+  /* Estilo del header */
+  ion-header {
+    --background: var(--custom-primary); /* Color de fondo del header */
+    --color: var(--custom-text-color); /* Color del texto */
+  }
+  
+  /* Estilo de bienvenida */
+  .welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--custom-primary);
+  }
+  
+  /* Estilos del card de login */
+  .login-card {
+    max-width: 400px; /* Tamaño máximo para el card en pantallas grandes */
+    margin: 0 auto; /* Centrar el card en la pantalla */
+    padding: 20px;
+  
+    border-radius: 10px;
+    background-color: #222222; /* Fondo oscuro */
+  }
+  
+  /* Estilo de los títulos de card */
+  ion-card-title {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #ffffff; /* Color del texto */
+  }
+  
+  /* Estilos específicos para cada botón */
+  .login-button {
+    --background: #121212;
+    --background-hover: #aeaeae;
+    color: #ffffff;
+    height: 2.5rem;
+    width: 85%;
+    margin: 10px auto;
+
+  }
+  
+  .ion-padding{
+    padding: 5px;
+  }
+  .register-button {
+    --background: #121212;
+    --background-hover: #aeaeae;
+    color: #ffffff;
+    height: 2.5rem;
+    width: 85%;
+    margin: 5px auto;
+  }
+  
+  /* Campos de entrada */
+  ion-input {
+    --color: var(--custom-input-text-color); /* Texto más claro */
+    --placeholder-color: #ffffff; /* Color más claro para el placeholder */
+    border-radius: 8px;
+    padding: 10px; /* Añadir relleno interno */
+    margin-bottom: 20px; /* Más espacio entre campos */
+    font-size: 1rem;
+  }
+  
+  /* Ajuste de los labels en el input */
+  ion-label {
+    color: var(--custom-primary); /* Color del label cuando está flotante */
+    font-size: 1rem;
+  }
+  
+  ion-item {
+    --highlight-color-focused: var(--custom-primary); /* Color de borde cuando el input está enfocado */
+  }
+  
+  /* Mensaje de error centrado */
+  .ion-text-center {
+    color: var(--custom-secondary); /* Color rojo para el texto de error */
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 10px;
+  }
+  
+  

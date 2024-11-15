@@ -1,0 +1,90 @@
+/* Colores personalizados */
+:root {
+    --custom-primary: #3880ff; /* Azul para el botón principal */
+    --custom-secondary: #ff4081; /* Rosa para el botón de regreso */
+    --custom-text-color: #ffffff; /* Blanco para el texto */
+    --custom-input-background: #2a2a2a; /* Fondo gris oscuro para los inputs */
+    --custom-input-text-color: #d3d3d3; /* Texto más claro en los inputs */
+  }
+  
+  /* Estilo del header */
+  ion-header {
+    --background: var(--custom-primary); /* Color de fondo del header */
+    --color: var(--custom-text-color); /* Color del texto */
+  }
+  
+  /* Estilo de bienvenida */
+  .welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--custom-primary);
+  }
+  
+  /* Estilos del card de registro */
+  .register-card {
+    max-width: 400px; /* Tamaño máximo para el card en pantallas grandes */
+    margin: 0 auto; /* Centrar el card en la pantalla */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #222222; /* Fondo oscuro */
+  }
+  
+  /* Estilo de los títulos de card */
+  ion-card-title {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #ffffff; /* Color del texto */
+  }
+  
+  /* Estilos específicos para los botones */
+  .register-button {
+    --background: #121212;
+    color: #ffffff;
+    height: 2.5rem;
+    width: 85%;
+    margin: 10px auto;
+  }
+  
+  /* Botón "Regresar" centrado, pero sin ocupar todo el ancho */
+  .back-button {
+    --background: #820000;
+    color: #ffffff;
+    height: 2.5rem;
+    width: 60%; /* Ocupa solo el 60% del ancho */
+    margin: 0 auto; /* Centrar el botón */
+    display: block; /* Para que el centrado funcione correctamente */
+  }
+  
+  /* Campos de entrada */
+  ion-input {
+    --color: var(--custom-input-text-color); /* Texto más claro */
+    --placeholder-color: #ffffff; /* Color más claro para el placeholder */
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+  
+  /* Ajuste de los labels en el input */
+  ion-label {
+    color: var(--custom-primary);
+    font-size: 1rem;
+  }
+  
+  ion-item {
+    --highlight-color-focused: var(--custom-primary);
+  }
+  
+  /* Mensaje de error centrado */
+  .ion-text-center {
+    color: var(--custom-secondary);
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 10px;
+  }
+  

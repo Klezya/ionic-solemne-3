@@ -5,51 +5,50 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2>¡Bienvenido! Regístrate a continuación</h2>
+  <div class="welcome-message">
+    <h2>¡Bienvenido!</h2>
+  </div>
 
-  <form (submit)="registerUser($event)">
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="user.nombre" name="nombre" required></ion-input>
-    </ion-item>
+  <!-- Card para el formulario de registro -->
+  <ion-card class="register-card">
+    <ion-card-header>
+      <ion-card-title>Regístrate a continuación</ion-card-title>
+    </ion-card-header>
 
-    <ion-item>
-      <ion-label position="floating">Primer Apellido</ion-label>
-      <ion-input [(ngModel)]="user.apellido1" name="apellido1" required></ion-input>
-    </ion-item>
+    <ion-card-content>
+      <form (submit)="registerUser($event)">
+        
+        <ion-input fill="outline" label="Nombre" labelPlacement="floating" [(ngModel)]="user.nombre" name="nombre" required></ion-input>
+        
+        <ion-input fill="outline" label="Primer Apellido" labelPlacement="floating" [(ngModel)]="user.apellido1" name="apellido1" required></ion-input>
+        
+        <ion-input fill="outline" label="Segundo Apellido" labelPlacement="floating" [(ngModel)]="user.apellido2" name="apellido2" required></ion-input>
+        
+        <!-- Campo de Comisión con ícono de dinero -->
+       
+        <ion-input fill="outline" label="Comisión" labelPlacement="floating" [(ngModel)]="user.comision" name="comision" type="number" required></ion-input>
+        
+        
+        <ion-input slot="cashOutline" fill="outline" label="Contraseña" labelPlacement="floating" [(ngModel)]="user.password" type="password" name="password" required></ion-input>
+        
+        <!-- Botón de Registro -->
+        <div class="ion-padding">
+          <ion-button type="submit" expand="block" fill="solid" shape="round" class="register-button" >Registrarse</ion-button>
+        </div>
+      </form>
 
-    <ion-item>
-      <ion-label position="floating">Segundo Apellido</ion-label>
-      <ion-input [(ngModel)]="user.apellido2" name="apellido2" required></ion-input>
-    </ion-item>
+      <!-- Botón para regresar (no ocupa todo el ancho) -->
+  <div class="ion-padding ion-text-center">
+    <ion-button fill="solid" shape="round" class="back-button" (click)="goBack()">Volver</ion-button>
+  </div>
 
-    <ion-item>
-      <ion-label position="floating">Comisión</ion-label>
-      <ion-input [(ngModel)]="user.comision" name="comision" type="number" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [(ngModel)]="user.password" type="password" name="password" required></ion-input>
-    </ion-item>
-
-    <div class="ion-padding">
-      <ion-button type="submit" expand="block">Registrarse</ion-button>
-    </div>
-  </form>
+    </ion-card-content>
+  </ion-card>
 
   <!-- Mensaje de error si hay un problema en el registro -->
   <div *ngIf="errorMessage" class="ion-text-center ion-padding">
     <ion-text color="danger">{{ errorMessage }}</ion-text>
   </div>
 
-
- <!-- Botón para regresar a la vista anterior -->
- <div class="ion-padding">
-  <ion-button expand="block" (click)="goBack()">Regresar</ion-button>
-</div>
-
-<div *ngIf="errorMessage" class="ion-text-center ion-padding">
-  <ion-text color="danger">{{ errorMessage }}</ion-text>
-</div>
+  
 </ion-content>
