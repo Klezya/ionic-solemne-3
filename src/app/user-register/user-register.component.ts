@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { IonicModule, AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common'; // Importar Location
+import { addIcons } from 'ionicons';
+import {cashOutline } from 'ionicons/icons';
+
 
 
 
@@ -26,7 +29,7 @@ export class UserRegisterComponent {
 
   errorMessage: string = '';  // Define errorMessage como una propiedad de tipo string
 
-  constructor(private location: Location) {} // Inyectar Location
+  constructor(private location: Location) {addIcons({cashOutline });} // Inyectar Location
 
 
   async registerUser(event: Event) {
@@ -35,13 +38,15 @@ export class UserRegisterComponent {
       const response = await axios.post('http://127.0.0.1:8000/api/comerciales/', this.user);
       console.log('Registro exitoso:', response.data);
       alert('Usuario registrado exitosamente');
+      await(1000);
+      this.location.back();
     } catch (error) {
       console.error('Error en el registro:', error);
       alert('Hubo un problema en el registro');
     }
   }
 
-  goBack() {
+  async goBack() {
     this.location.back(); // Regresar a la vista anterior
   }
 
