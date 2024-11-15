@@ -33,7 +33,6 @@ export class UserRegisterComponent {
     event.preventDefault();
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/comerciales/', this.user);
-      console.log('Registro exitoso:', response.data);
       alert('Usuario registrado exitosamente');
     } catch (error) {
       console.error('Error en el registro:', error);
