@@ -1,0 +1,78 @@
+/* Centrar el grid en la página */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 180px); /* 2 columnas, ancho fijo para cada card */
+    grid-template-rows: repeat(2, 150px);    /* 2 filas, alto fijo para cada card */
+    gap: 20px;                               /* Espacio entre los cards */
+    justify-content: center;                 /* Centrar horizontalmente */
+    align-items: center;                     /* Centrar verticalmente */
+    margin: 0 auto;                          /* Centrar el grid en la página */
+    padding-top: 20px;                       /* Espacio arriba */
+  }
+  
+  /* Estilos de las cards */
+  .grid-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para las cards */
+    border-radius: 10px;
+    overflow: hidden; /* Asegura que el botón ocupe toda el área de la card */
+  }
+  
+  /* Botones dentro de las cards */
+  .grid-card ion-button {
+    width: 100%;
+    height: 100%;
+    font-size: 1.2rem; /* Tamaño de texto */
+    text-align: center;
+    border-radius: 0; /* Eliminar el borde redondeado del botón */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .otros{
+    color: #ffffff;
+    --background: #6B3638;
+  }
+
+  .clientes{
+    color: #ffffff;
+    --background: #FE6C3A;
+  }
+
+  .pedidos{
+    color: #ffffff;
+    --background: #8e7b6b;
+  }
+
+  .comerciales{
+    color: #ffffff;
+    --background: #9EACB7;
+  }
+
+  
+  /* Contenedor para centrar el botón Generar Pedido */
+  .genpedido-container {
+    display: flex;
+    width: auto;
+    justify-content: center;  /* Centrar el botón horizontalmente */
+    align-items: center;      /* Centrar el botón verticalmente si es necesario */
+    margin-top: 20px;     
+    padding-left: 20px;    /* Separación del grid */
+  }
+  
+  /* Botón Generar Pedido centrado */
+  .genpedido {
+    --background: #2C3039;
+    color: #ffffff;
+    width: 100%;              /* Ocupa todo el ancho del contenedor */
+    max-width: 400px;         /* Ancho máximo */
+    height: 50px;             /* Ajusta la altura si es necesario */
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  

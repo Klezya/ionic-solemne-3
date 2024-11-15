@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import axios from 'axios';
@@ -10,10 +10,14 @@ import axios from 'axios';
   standalone: true,
   imports: [IonicModule, CommonModule],
 })
-export class HomePage {
+export class HomePage implements OnInit{
   datos: any[] = []; // Propiedad para almacenar los datos de la API
 
   constructor() {}
+
+  async ngOnInit() {
+    await this.callApi()  
+  }
 
   async callApi() {
     try {
