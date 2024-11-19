@@ -41,8 +41,4 @@ export class IntermediateComponent {
     this.router.navigate(['/pedidos-register'])
   }
 
-  goToProductos(){
-    this.router.navigate(['/productos'])
-  }
-
 }

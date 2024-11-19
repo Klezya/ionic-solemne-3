@@ -10,6 +10,5 @@ export const routes: Routes = [
   { path: 'client-register', loadComponent: () => import('./cliente-register/cliente-register.component').then(m => m.ClienteRegisterComponent) },
   { path: 'pedidos-register', loadComponent: () => import('./pedidos-register/pedidos-register.component').then(m => m.PedidosRegisterComponent) },
   { path: 'pedido-details', loadComponent: () => import('./pedido-details/pedido-details.component').then(m => m.PedidoDetailsComponent)},
-  { path: 'productos', loadComponent: () => import('./productos/productos.component').then(m => m.ProductosComponent)},
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
