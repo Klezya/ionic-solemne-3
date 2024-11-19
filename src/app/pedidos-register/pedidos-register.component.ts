@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, AlertController } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import axios from 'axios';
+import { CommonModule, Location } from '@angular/common';
+import { IonicModule, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { Pedido, Comercial } from '../interface/interface';
+import axios from 'axios';
 
 @Component({
   selector: 'app-pedidos-register',
@@ -17,7 +15,7 @@ import { Pedido, Comercial } from '../interface/interface';
 export class PedidosRegisterComponent implements OnInit {
   fecha_hoy = new Date().toISOString().slice(0, 10);
 
-  pedido: Pedido = {
+  pedido: any = {
     total: '',
     fecha: this.fecha_hoy,
     cliente: '',
@@ -28,17 +26,19 @@ export class PedidosRegisterComponent implements OnInit {
   productos: any[] = [];
   errorMessage: string = '';
   clientes: any;
-  comercial: Comercial = {id: '', nombre: '', apellido1: '', apellido2: '', comision: 0};
+  comercial: any = {id: '', nombre: '', apellido1: '', apellido2: '', comision: 0};
   nombreCompleto: string = '';
 
-  constructor(private location: Location, private router: Router, private alertController: AlertController) {}
+  constructor(
+    private location: Location,
+    private router: Router,
+    private alertController: AlertController
+  ) {}
 
   async ngOnInit() {
     await this.fetchClientes();
-    await this.fetchComercial();
     await this.fetchProductos();
-    this.pedido.comercial = this.comercial.id;
-    this.nombreCompleto = `${this.comercial.nombre} ${this.comercial.apellido1} ${this.comercial.apellido2}`;
+    await this.fetchComercial();
   }
 
   async fetchClientes() {
@@ -50,21 +50,22 @@ export class PedidosRegisterComponent implements OnInit {
     }
   }
 
-  async fetchComercial() {
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/comerciales/${localStorage.getItem('comercialid')}`);
-      this.comercial = response.data;
-    } catch (error) {
-      console.error('Error al obtener el comercial:', error);
-    }
-  }
-
   async fetchProductos() {
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/productos/');
       this.productos = response.data;
     } catch (error) {
       console.error('Error al obtener los productos:', error);
+    }
+  }
+
+  async fetchComercial() {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/comerciales/${localStorage.getItem('comercialid')}`);
+      this.comercial = response.data;
+      this.nombreCompleto = `${this.comercial.nombre} ${this.comercial.apellido1} ${this.comercial.apellido2}`;
+    } catch (error) {
+      console.error('Error al obtener el comercial:', error);
     }
   }
 
@@ -81,36 +82,37 @@ export class PedidosRegisterComponent implements OnInit {
     if (productoExistente) {
       productoExistente.cantidad += cantidad;
     } else {
-      this.productosSeleccionados.push({ producto, cantidad });
+      this.productosSeleccionados.push({ producto: producto.id, cantidad });
     }
     this.calcularTotal();
   }
 
   calcularTotal() {
-    this.pedido.total = this.productosSeleccionados.reduce((total, item) => total + (item.producto.precio * item.cantidad), 0).toFixed(2);
+    this.pedido.total = this.productosSeleccionados.reduce((total, item) => {
+      const producto = this.productos.find(p => p.id === item.producto);
+      return total + (producto.precio * item.cantidad);
+    }, 0).toFixed(2);
   }
 
   async registerPedido(event: Event) {
     event.preventDefault();
     try {
-      const pedidoData = {
+      const response = await axios.post('http://127.0.0.1:8000/api/pedidos/', {
         ...this.pedido,
-        productos: this.productosSeleccionados.map(item => ({ producto: item.producto.id, cantidad: item.cantidad }))
-      };
-      const response = await axios.post('http://127.0.0.1:8000/api/pedidos/', pedidoData);
-      console.log('Registro exitoso:', response.data);
+        productos: this.productosSeleccionados
+      });
+      console.log('Pedido registrado exitosamente:', response.data);
       alert('Pedido registrado exitosamente');
-      this.router.navigate(['/pedido-details'], { state: { pedido: this.pedido } });
     } catch (error) {
-      console.error('Error en el registro:', error);
-      alert('Hubo un problema en el registro');
+      console.error('Error al registrar el pedido:', error);
+      alert('Hubo un problema al registrar el pedido');
     }
   }
 
   async showAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'Información',
-      message: message,
+      header: 'Alerta',
+      message,
       buttons: ['OK']
     });
     await alert.present();
