@@ -4,6 +4,7 @@ import { CommonModule, Location } from '@angular/common';
 import { IonicModule, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import axios from 'axios';
+import { ProductoSeleccionado } from '../interface/interface';
 
 @Component({
   selector: 'app-pedidos-register',
@@ -19,10 +20,10 @@ export class PedidosRegisterComponent implements OnInit {
     total: '',
     fecha: this.fecha_hoy,
     cliente: '',
-    comercial: '',
+    comercial: localStorage.getItem('comercialid'),
   };
 
-  productosSeleccionados: any[] = [];
+  productosSeleccionados: ProductoSeleccionado[] = [];
   productos: any[] = [];
   errorMessage: string = '';
   clientes: any;
@@ -78,7 +79,7 @@ export class PedidosRegisterComponent implements OnInit {
       this.showAlert('Inventario insuficiente para el producto ' + producto.nombre);
       return;
     }
-    const productoExistente = this.productosSeleccionados.find(p => p.producto.id === producto.id);
+    const productoExistente = this.productosSeleccionados.find(p => p.producto === producto.id);
     if (productoExistente) {
       productoExistente.cantidad += cantidad;
     } else {
@@ -90,16 +91,25 @@ export class PedidosRegisterComponent implements OnInit {
   calcularTotal() {
     this.pedido.total = this.productosSeleccionados.reduce((total, item) => {
       const producto = this.productos.find(p => p.id === item.producto);
-      return total + (producto.precio * item.cantidad);
+      return total + (producto.precio * Number(item.cantidad));
     }, 0).toFixed(2);
   }
 
   async registerPedido(event: Event) {
     event.preventDefault();
     try {
+      this.pedido.comercial = Number(localStorage.getItem('comercialid'));
+      const productos = this.productosSeleccionados.map(item => ({
+        producto: item.producto, // Asegúrate de enviar solo el ID del producto
+        cantidad: item.cantidad
+      }));
+      console.log('Datos del pedido:', {
+        ...this.pedido,
+        productos
+      });
       const response = await axios.post('http://127.0.0.1:8000/api/pedidos/', {
         ...this.pedido,
-        productos: this.productosSeleccionados
+        productos
       });
       console.log('Pedido registrado exitosamente:', response.data);
       alert('Pedido registrado exitosamente');
