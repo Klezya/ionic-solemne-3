@@ -37,6 +37,18 @@
     </ion-item>
 
     <ion-button (click)="agregarProducto(productoSelect.value, cantidadInput.value ? +cantidadInput.value : 0)">Agregar Producto</ion-button>
+    
+    <h2>Carrito</h2>
+    <ion-list *ngIf="productosSeleccionados.length > 0">
+      <ion-item *ngFor="let producto of productosSeleccionados">
+        <ion-label>
+          <p>Producto: {{ getProductName(producto.producto) }} </p>
+          <p>Cantidad: {{ producto.cantidad }} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+
 
     <h2>Total: {{ pedido.total }}</h2>
 

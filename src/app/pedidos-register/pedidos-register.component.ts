@@ -135,4 +135,9 @@ export class PedidosRegisterComponent implements OnInit {
   goToRegisterClient() {
     this.router.navigate(['/cliente-register']);
   }
+
+  getProductName(productId: string): string {
+    const producto = this.productos.find(p => p.id === Number(productId));
+    return producto ? producto.nombre : 'Producto no encontrado';
+  }
 }
