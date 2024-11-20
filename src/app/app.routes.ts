@@ -10,5 +10,6 @@ export const routes: Routes = [
   { path: 'cliente-register', loadComponent: () => import('./cliente-register/cliente-register.component').then(m => m.ClienteRegisterComponent) },
   { path: 'pedidos-register', loadComponent: () => import('./pedidos-register/pedidos-register.component').then(m => m.PedidosRegisterComponent) },
   { path: 'pedido-details', loadComponent: () => import('./pedido-details/pedido-details.component').then(m => m.PedidoDetailsComponent)},
+  { path: 'productos-list', loadComponent: () => import('./productos-list/productos-list.component').then(m => m.ProductosListComponent)},
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
