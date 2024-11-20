@@ -12,3 +12,8 @@ export interface Pedido {
     cliente: string;
     comercial: string; 
 }
+
+export interface ProductoSeleccionado {
+    producto: string;
+    cantidad: number;
+}

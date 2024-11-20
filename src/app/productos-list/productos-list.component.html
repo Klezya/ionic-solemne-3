@@ -8,17 +8,19 @@
   <h2>Lista de Comerciales</h2>
 
   <!-- Lista de comerciales -->
-  <ion-list *ngIf="comerciales.length > 0">
-    <ion-item *ngFor="let comercial of comerciales">
+  <ion-list *ngIf="productos.length > 0">
+    <ion-item *ngFor="let producto of productos">
       <ion-label>
-        <h2>Comercial #{{ comercial.id }}</h2>
-        <p>Nombre: {{ comercial.nombre }}</p>
-        <p>Apellidos: {{ comercial.apellido1 }} {{ comercial.apellido2 }}</p>
+        <h2>producto #{{ producto.id }}</h2>
+        <p>Nombre: {{ producto.nombre }}</p>
+        <p>Precio: {{ producto.precio }}</p>
+        <p>Stock: {{ producto.cantidad_disponible }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
 
   <!-- Mensaje si no hay comerciales o si hay un error -->
-  <p *ngIf="comerciales.length === 0 && !errorMessage">No hay comerciales disponibles. Presiona "API Call" para obtener los datos.</p>
+  <p *ngIf="productos.length === 0 && !errorMessage">No hay comerciales disponibles. Presiona "API Call" para obtener los datos.</p>
   <p *ngIf="errorMessage" class="ion-text-center ion-padding">{{ errorMessage }}</p>
 </ion-content>
+

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule para ngModel
-import axios from 'axios';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule, Location } from '@angular/common';
 import { IonicModule, AlertController } from '@ionic/angular';
-import { Location } from '@angular/common';
-import { Comercial, Pedido } from '../interface/interface'
+import { Router } from '@angular/router';
+import axios from 'axios';
+import { ProductoSeleccionado } from '../interface/interface';
 
 @Component({
   selector: 'app-pedidos-register',
@@ -14,70 +13,131 @@ import { Comercial, Pedido } from '../interface/interface'
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class PedidosRegisterComponent implements OnInit{
-
+export class PedidosRegisterComponent implements OnInit {
   fecha_hoy = new Date().toISOString().slice(0, 10);
 
-  pedido: Pedido = {
+  pedido: any = {
     total: '',
     fecha: this.fecha_hoy,
     cliente: '',
-    comercial: '',
+    comercial: localStorage.getItem('comercialid'),
   };
 
-  errorMessage: string = '';  // Define errorMessage como una propiedad de tipo string
+  productosSeleccionados: ProductoSeleccionado[] = [];
+  productos: any[] = [];
+  errorMessage: string = '';
   clientes: any;
-  comercial: Comercial = {id: '', nombre: '', apellido1: '', apellido2: '', comision: 0};
-  nombreCompleto: string = ''
-  
+  comercial: any = {id: '', nombre: '', apellido1: '', apellido2: '', comision: 0};
+  nombreCompleto: string = '';
 
-  constructor(private location: Location, private router: Router) {} // Inyectar Location
-
+  constructor(
+    private location: Location,
+    private router: Router,
+    private alertController: AlertController
+  ) {}
 
   async ngOnInit() {
     await this.fetchClientes();
+    await this.fetchProductos();
     await this.fetchComercial();
-    this.pedido.comercial = this.comercial.id
-    this.nombreCompleto = `${this.comercial.nombre} ${this.comercial.apellido1} ${this.comercial.apellido2}`
   }
 
   async fetchClientes() {
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/clientes/');
-      this.clientes = response.data; // Guarda la lista de clientes obtenida de la API
+      this.clientes = response.data;
     } catch (error) {
       console.error('Error al obtener los clientes:', error);
+    }
+  }
+
+  async fetchProductos() {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/productos/');
+      this.productos = response.data;
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
     }
   }
 
   async fetchComercial() {
     try {
       const response = await axios.get(`http://127.0.0.1:8000/api/comerciales/${localStorage.getItem('comercialid')}`);
-      this.comercial = response.data; // Guarda el comercial obtenido de la API
+      this.comercial = response.data;
+      this.nombreCompleto = `${this.comercial.nombre} ${this.comercial.apellido1} ${this.comercial.apellido2}`;
     } catch (error) {
       console.error('Error al obtener el comercial:', error);
     }
   }
 
+  agregarProducto(producto: any, cantidad: number) {
+    if (cantidad <= 0) {
+      this.showAlert('La cantidad debe ser mayor a 0');
+      return;
+    }
+    if (producto.cantidad_disponible < cantidad) {
+      this.showAlert('Inventario insuficiente para el producto ' + producto.nombre);
+      return;
+    }
+    const productoExistente = this.productosSeleccionados.find(p => p.producto === producto.id);
+    if (productoExistente) {
+      productoExistente.cantidad += cantidad;
+    } else {
+      this.productosSeleccionados.push({ producto: producto.id, cantidad });
+    }
+    this.calcularTotal();
+  }
+
+  calcularTotal() {
+    this.pedido.total = this.productosSeleccionados.reduce((total, item) => {
+      const producto = this.productos.find(p => p.id === item.producto);
+      return total + (producto.precio * Number(item.cantidad));
+    }, 0).toFixed(2);
+  }
 
   async registerPedido(event: Event) {
     event.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/pedidos/', this.pedido);
-      console.log('Registro exitoso:', response.data);
+      this.pedido.comercial = Number(localStorage.getItem('comercialid'));
+      const productos = this.productosSeleccionados.map(item => ({
+        producto: item.producto, // Asegúrate de enviar solo el ID del producto
+        cantidad: item.cantidad
+      }));
+      console.log('Datos del pedido:', {
+        ...this.pedido,
+        productos
+      });
+      const response = await axios.post('http://127.0.0.1:8000/api/pedidos/', {
+        ...this.pedido,
+        productos
+      });
+      console.log('Pedido registrado exitosamente:', response.data);
       alert('Pedido registrado exitosamente');
-      this.router.navigate(['/pedido-details'], { state: { pedido: this.pedido } })
     } catch (error) {
-      console.error('Error en el registro:', error);
-      alert('Hubo un problema en el registro');
+      console.error('Error al registrar el pedido:', error);
+      alert('Hubo un problema al registrar el pedido');
     }
   }
 
+  async showAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   goBack() {
-    this.location.back(); // Regresar a la vista anterior
+    this.location.back();
   }
 
   goToRegisterClient() {
-    this.router.navigate(['/client-register'])
+    this.router.navigate(['/cliente-register']);
+  }
+
+  getProductName(productId: string): string {
+    const producto = this.productos.find(p => p.id === Number(productId));
+    return producto ? producto.nombre : 'Producto no encontrado';
   }
 }

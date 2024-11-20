@@ -1,18 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registro de Comercial</ion-title>
+    <ion-title>Registro de Pedido</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2>¡Bienvenido! Regístrate a continuación</h2>
+  <h2>¡Bienvenido! Registra tu pedido a continuación</h2>
 
   <form (submit)="registerPedido($event)">
-    <ion-item>
-      <ion-label position="floating">Total</ion-label>
-      <ion-input [(ngModel)]="pedido.total" name="nombre" required></ion-input>
-    </ion-item>
-
     <ion-item>
       <ion-label position="floating">Cliente</ion-label>
       <ion-select [(ngModel)]="pedido.cliente" name="cliente" required>
@@ -27,6 +22,36 @@
       <ion-input [(ngModel)]="nombreCompleto" name="comercial" required [disabled]="true"></ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-label position="floating">Producto</ion-label>
+      <ion-select #productoSelect>
+        <ion-select-option *ngFor="let producto of productos" [value]="producto">
+          {{ producto.nombre }} - {{ producto.precio }} (Disponible: {{ producto.cantidad_disponible }})
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cantidad</ion-label>
+      <ion-input #cantidadInput type="number"></ion-input>
+    </ion-item>
+
+    <ion-button (click)="agregarProducto(productoSelect.value, cantidadInput.value ? +cantidadInput.value : 0)">Agregar Producto</ion-button>
+    
+    <h2>Carrito</h2>
+    <ion-list *ngIf="productosSeleccionados.length > 0">
+      <ion-item *ngFor="let producto of productosSeleccionados">
+        <ion-label>
+          <p>Producto: {{ getProductName(producto.producto) }} </p>
+          <p>Cantidad: {{ producto.cantidad }} </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+
+
+    <h2>Total: {{ pedido.total }}</h2>
+
     <div class="ion-padding">
       <ion-button type="submit" expand="block">Registrar Pedido</ion-button>
     </div>
@@ -35,4 +60,4 @@
       <ion-button (click)="goToRegisterClient()" expand="block">Registrar Nuevo Cliente</ion-button>
     </div>
   </form>
-
+</ion-content>
