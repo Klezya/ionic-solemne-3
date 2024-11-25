@@ -33,6 +33,11 @@
       <ion-input [(ngModel)]="client.categoria" type="number" name="categirua" required></ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input [(ngModel)]="client.correo" type="correo" name="correo" required></ion-input>
+    </ion-item>
+
     <div class="ion-padding">
       <ion-button type="submit" expand="block">Registrarse</ion-button>
     </div>

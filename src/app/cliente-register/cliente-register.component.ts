@@ -20,6 +20,7 @@ export class ClienteRegisterComponent {
     apellido2: '',
     ciudad: '',
     categoria: 0,
+    correo: '',
   };
 
   errorMessage: string = '';  // Define errorMessage como una propiedad de tipo string
